@@ -13,12 +13,12 @@ public class Main {
         Integer lastNumber = input.nextInt();
 
         //For Write
-        Numerical.FileWriter(firstNumber, lastNumber);
+        NumberGenerator.FileWriter(firstNumber, lastNumber);
 
         //For Read the file from the terminal
-        Numerical.FileReader();
+        NumberGenerator.FileReader();
 
         //For to get file size
-        System.out.println(Numerical.getFileSize());
+        System.out.println(NumberGenerator.getFileSize());
     }
 }

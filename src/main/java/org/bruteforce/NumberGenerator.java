@@ -2,8 +2,9 @@ package org.bruteforce;
 
 import java.io.*;
 
-public class Numerical {
-    private final static String filePath = "C:\\Users\\astan\\Documents\\TestForIt.txt"; //The file path is here
+public class NumberGenerator {
+    private final static String filePath = "C:\\Users\\astan\\Documents\\TestForIt.txt";
+    private static final File file = new File(filePath);
 
     public static void FileWriter(Integer currentNumber, Integer lastNumber) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
@@ -29,25 +30,41 @@ public class Numerical {
 
     public static void FileReader()  {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String currentLine;
-            while((currentLine = reader.readLine()) != null){
-                System.out.println(currentLine);
-            }
-            reader.close();
+            readAndPrintFile();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logError(e);
         }
+    }
+    private static void readAndPrintFile() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String currentLine;
+        while((currentLine = reader.readLine()) != null){
+            System.out.println(currentLine);
+        }
+        reader.close();
     }
 
     public static String getFileSize() {
-        File file = new File(filePath);
-        String onBytes = file.length() + "bytes";
-        String onKB = (double) (file.length() / 1024) + "KB";
-        String onMB = (double) (file.length() / (1024 * 1024))+ "MB";
-
-        return "This are file size: " + onBytes + "\t//" + onKB + "\t//" + onMB;
+        return "This are file size: " + calculateFileSizeInBytes() + "\t//"
+                + calculateFileSizeInKiloBytes() + "\t//"
+                + calculateFileSizeInMegaBytes();
     }
+    public static String calculateFileSizeInBytes() {
+        return file.length() + "bytes";
+    }
+    public static String calculateFileSizeInKiloBytes() {
+        return (double) (file.length() / 1024) + "KB";
+    }
+    public static String calculateFileSizeInMegaBytes() {
+        return (double) (file.length() / (1024 * 1024))+ "MB";
+    }
+
+
+    public static Exception logError(Exception e) {  //TODO - A bad example must be corrected.
+        return e;
+    }
+
+
 
 }
 
